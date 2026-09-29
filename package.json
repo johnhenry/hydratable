@@ -1,0 +1,32 @@
+{
+  "name": "@johnhenry/hydratable",
+  "version": "0.0.0",
+  "description": "A generic async hydration mixin, plus framework-agnostic DOM mount-point helpers for handing a mount element to React/Vue/Solid.",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*"
+  },
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "test": "node scripts/check-syntax.mjs && node test/import.test.mjs"
+  },
+  "keywords": [
+    "hydration",
+    "hydrate",
+    "dom",
+    "mount",
+    "ssr"
+  ],
+  "author": "John Henry",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnhenry/hydratable.git"
+  },
+  "homepage": "https://opensource.johnhenry.me/hydratable/",
+  "engines": {
+    "node": ">=26.0.0"
+  }
+}
