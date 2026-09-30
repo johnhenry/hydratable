@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  body { font: 14px/1.5 system-ui, sans-serif; margin: 12px; }
+  #before-marker, #after-marker { padding: 4px 8px; background: #eee; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div id="before-marker">this page's own first child (before mounting)</div>
+<p>Framework-agnostic mount points -- <code>first</code>/<code>last</code>
+resolve <code>body</code>'s first/last child (creating one if
+"unsuitable" or absent). Imported below; note both are resolved at
+<em>import time</em>, not on demand, so this page's structure is fixed
+the moment the module loads:</p>
+<div id="after-marker">this page's own last child (before mounting)</div>
+<script type="module">
+  import first from "./first.mjs";
+  import last from "./last.mjs";
+
+  first.textContent = "<- mounted here via mounts/first.mjs (now body's actual first child)";
+  first.style.background = "#efe";
+  last.textContent = "<- mounted here via mounts/last.mjs (now body's actual last child)";
+  last.style.background = "#eef";
+</script>
+</body>
+</html>

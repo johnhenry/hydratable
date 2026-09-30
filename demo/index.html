@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>hydratable — demo gallery</title>
+<style>
+  :root { color-scheme: light dark; --border: #d0d0d8; --bg-card: #fff; --bg-page: #f6f6f9; }
+  @media (prefers-color-scheme: dark) { :root { --border: #3a3a44; --bg-card: #1c1c24; --bg-page: #101014; } }
+  * { box-sizing: border-box; }
+  body { font: 15px/1.5 system-ui, sans-serif; margin: 0; padding: 32px 24px 64px; background: var(--bg-page); color: inherit; }
+  header { max-width: 900px; margin: 0 auto 24px; }
+  main { max-width: 1100px; margin: 0 auto; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .card h3 { margin: 0; padding: 10px 14px 0; font-size: 15px; }
+  .card p { margin: 4px 0 10px; padding: 0 14px; font-size: 13px; color: #888; }
+  .card iframe { width: 100%; height: 220px; border: none; border-top: 1px solid var(--border); background: #fff; }
+  footer { max-width: 900px; margin: 40px auto 0; font-size: 13px; color: #888; }
+</style>
+</head>
+<body>
+<header>
+  <h1>hydratable</h1>
+  <p>Framework-agnostic mount points, plus a generic async hydration mixin.</p>
+</header>
+<main>
+  <div class="grid">
+    <div class="card">
+      <h3>mounts</h3>
+      <p>Body-first/body-last mount points, resolved at import time. Note this frame's own structure gets mutated on load — see the note inside.</p>
+      <iframe src="../src/mounts/demo.html"></iframe>
+    </div>
+    <div class="card">
+      <h3>hydratable</h3>
+      <p>A guarded async <code>hydrate()</code> mixin — click to hydrate, click again to see the no-op guard.</p>
+      <iframe src="../src/hydratable/demo.html"></iframe>
+    </div>
+  </div>
+</main>
+<footer>
+  <p>Requires a static server (module imports don't resolve over <code>file://</code>) — <code>npx http-server .</code> from the repo root, then visit <code>/demo/</code>. See the <a href="../README.md">root README</a>.</p>
+</footer>
+</body>
+</html>

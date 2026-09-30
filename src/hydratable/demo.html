@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  body { font: 14px/1.5 system-ui, sans-serif; margin: 12px; }
+  button { font: inherit; padding: 6px 12px; }
+  #status { margin-top: 8px; font-family: ui-monospace, monospace; }
+</style>
+<script type="module">
+  import Hydratable from "./index.mjs";
+
+  class Widget {
+    constructor() {
+      this.data = null;
+    }
+  }
+  // Mix the async hydrate() method onto the prototype -- guards against
+  // re-hydrating (HYDRATED flag) and against calling it directly on the
+  // shared prototype object rather than an instance.
+  Object.assign(
+    Widget.prototype,
+    Hydratable(async function ({ finalizer }) {
+      document.getElementById("status").textContent = "hydrating...";
+      await new Promise((r) => setTimeout(r, 600)); // simulate an async load
+      this.data = { loadedAt: new Date().toLocaleTimeString() };
+      finalizer(() => {
+        document.getElementById("status").textContent =
+          `hydrated -- data.loadedAt = ${this.data.loadedAt}`;
+      });
+    }),
+  );
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const widget = new Widget();
+    document.getElementById("hydrate").onclick = async () => {
+      await widget.hydrate();
+    };
+    document.getElementById("hydrate-again").onclick = async () => {
+      await widget.hydrate(); // second call is a no-op -- already hydrated
+      document.getElementById("status").textContent += " (second call was a no-op)";
+    };
+  });
+</script>
+</head>
+<body>
+<p>A generic async hydration mixin: adds a guarded <code>hydrate()</code>
+method to a prototype that runs your hydration function once, then a
+<code>finalizer</code> callback after it completes:</p>
+<button id="hydrate">Hydrate</button>
+<button id="hydrate-again">Hydrate again (no-op)</button>
+<div id="status">(not hydrated)</div>
+</body>
+</html>
