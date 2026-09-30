@@ -6,6 +6,13 @@
 
 Full documentation: [opensource.johnhenry.me/hydratable](https://opensource.johnhenry.me/hydratable/)
 
+> **Archived.** This package is folded back into
+> [`@johnhenry/domkit`](https://github.com/johnhenry/domkit) as of domkit
+> `0.0.4` — import `@johnhenry/domkit/hydratable/...` instead. The
+> unscoped npm package `@johnhenry/hydratable` is deprecated (not removed)
+> and will keep working at its last published version; this repo is
+> archived (read-only, not deleted).
+
 A generic async hydration mixin — `Hydratable(hydrateFn)` returns a
 prototype object you `Object.assign` onto a class's prototype, adding a
 guarded async `hydrate()` method. Also ships `mounts`, the companion this
